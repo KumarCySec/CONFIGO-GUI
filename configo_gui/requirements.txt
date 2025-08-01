@@ -1,0 +1,45 @@
+# CONFIGO GUI - Desktop Application Dependencies
+# ==============================================
+# This file contains all required Python packages for CONFIGO GUI to function properly.
+# Each package is listed with its specific purpose in the CONFIGO GUI ecosystem.
+
+# GUI Framework
+PySide6>=6.5.0                    # Qt for Python - Modern GUI framework
+qdarktheme>=3.1.0                  # Dark theme for PySide6 applications
+
+# Core HTTP and API dependencies (inherited from CONFIGO backend)
+requests>=2.31.0                   # HTTP requests for API calls
+python-dotenv>=1.0.0              # Environment variable management
+
+# Configuration and data parsing
+pyyaml>=6.0                       # YAML parsing for configurations
+
+# LLM and AI dependencies (inherited from CONFIGO backend)
+google-generativeai>=0.3.0        # Google Gemini API client
+mem0ai>=0.1.0                     # Intelligent memory storage (optional)
+
+# System and platform dependencies (inherited from CONFIGO backend)
+distro>=1.8.0                     # Linux distribution detection
+psutil>=5.9.0                     # System information and process management
+py-cpuinfo>=9.0.0                 # Detailed CPU information detection
+GPUtil>=1.4.0                     # GPU detection and monitoring
+
+# Development and testing dependencies
+pytest>=7.0.0                     # Unit testing framework
+pytest-cov>=4.0.0                 # Test coverage reporting
+
+# Optional: Enhanced UI features
+# pyside6-lottie>=1.0.0          # Lottie animations for PySide6 (uncomment if needed)
+
+# Optional: Enhanced memory and search (uncomment if needed)
+# chromadb>=0.4.0                 # Vector database for semantic search
+# sentence-transformers>=2.2.0     # Text embeddings for semantic similarity
+
+# Optional: Packaging and distribution
+# PyInstaller>=5.0.0              # For creating standalone executables
+# fbs>=0.9.0                      # For creating installers
+
+# Development tools (optional)
+# black>=23.0.0                   # Code formatting
+# flake8>=6.0.0                   # Code linting
+# mypy>=1.0.0                     # Type checking 
