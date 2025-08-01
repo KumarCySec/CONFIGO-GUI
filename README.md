@@ -1,205 +1,155 @@
-# 🚀 CONFIGO - Autonomous AI Setup Agent
+# CONFIGO GUI - Modern Desktop Application
 
-> **Intelligent, memory-aware development environment setup with LLM-powered recommendations and self-healing capabilities**
+A beautiful, modern desktop application for intelligent development environment setup. Built with PySide6 and featuring glassmorphism effects, smooth animations, and seamless integration with the CONFIGO CLI backend.
 
-[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![AI-Powered](https://img.shields.io/badge/AI--Powered-Gemini%20LLM-purple.svg)]()
-[![Self-Healing](https://img.shields.io/badge/Self--Healing-Automatic%20Recovery-green.svg)]()
-[![Memory](https://img.shields.io/badge/Memory-mem0%20Enhanced-orange.svg)]()
+![CONFIGO GUI](https://img.shields.io/badge/Version-1.0.0-blue)
+![PySide6](https://img.shields.io/badge/PySide6-6.5.0+-green)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-<div align="center">
+## 🧠 What is CONFIGO GUI?
 
-**🧠 Intelligent • 🔧 Self-Healing • 💾 Memory-Aware • 🎯 Domain-Specific • 📱 App Installation**
+CONFIGO GUI is a modern, cross-platform desktop application that provides an intelligent interface for setting up development environments. It combines the power of Google's Gemini LLM with a beautiful, glassmorphic UI to deliver a premium development experience.
 
-*The ultimate AI-powered development environment setup agent that understands your needs and learns from your preferences*
+### Key Features
 
-</div>
-
----
-
-## 🎯 What is CONFIGO?
-
-CONFIGO is an **autonomous AI agent** that intelligently sets up development environments using natural language. It combines the power of Google's Gemini LLM with persistent memory to provide personalized, context-aware tool recommendations and automatic installation.
-
-### ✨ Key Features
-
-- **🧠 LLM-Powered Intelligence**: Uses Gemini API for intelligent tool recommendations
+- **🎨 Modern Glassmorphism Design**: Beautiful glass-like effects with blur and transparency
+- **🧠 AI-Powered Intelligence**: Uses Google Gemini for intelligent tool recommendations
 - **💾 Persistent Memory**: Remembers your preferences and installation history
 - **🔧 Self-Healing**: Automatically fixes installation failures using AI
 - **🎯 Domain-Aware**: Understands different development domains (AI/ML, Web, DevOps, etc.)
-- **📱 Natural Language App Installation**: Install any app with simple commands like "Install Discord"
+- **📱 Natural Language Input**: Describe your environment needs in plain English
 - **🌐 Portal Orchestration**: Automated login portal management
 - **✅ Post-Installation Validation**: Ensures everything works correctly
-- **🎨 Rich Terminal UI**: Beautiful, informative interface
 
----
+## 🪟 Features of the Desktop App
 
-## 🚀 Quick Start
+### 🎨 Modern UI Components
+
+- **Glassmorphism Cards**: Beautiful glass-like cards with blur effects
+- **Smooth Animations**: Framer Motion-like transitions and hover effects
+- **Dark Theme**: Modern dark theme optimized for developers
+- **Responsive Layout**: Adapts to different screen sizes
+- **Toast Notifications**: Elegant notification system
+
+### 🧩 Smart Navigation
+
+- **Sidebar Navigation**: Clean sidebar with glassmorphism effects
+- **View Transitions**: Smooth transitions between different views
+- **Progress Tracking**: Real-time progress with animated progress bars
+- **Status Indicators**: Clear success/error status for each operation
+
+### 💾 Memory & History
+
+- **Session History**: Track all previous environment setups
+- **User Preferences**: Store and manage user preferences
+- **Tool Statistics**: Track installation success rates and usage
+- **Memory Export**: Export memory data for backup or analysis
+
+### ⚡ Advanced Features
+
+- **Async Operations**: Non-blocking installation processes
+- **Error Recovery**: Intelligent error handling and retry mechanisms
+- **System Integration**: Deep integration with existing CONFIGO backend
+- **Plugin Support**: Extensible architecture for future enhancements
+
+## 🎨 Tech Stack
+
+### Frontend
+- **PySide6**: Modern Qt for Python framework
+- **qdarktheme**: Beautiful dark theme support
+- **QGraphicsBlurEffect**: Glassmorphism blur effects
+- **QPropertyAnimation**: Smooth animations and transitions
+- **Custom CSS**: Modern styling with gradients and shadows
+
+### Backend Integration
+- **CLI Submodule**: External CLI repo as git submodule
+- **InstallEngine**: Wrapper that interfaces with CLI logic
+- **Async Threading**: Background processing for installations
+- **Memory System**: Persistent storage with JSON
+
+### Development Tools
+- **pytest**: Comprehensive testing framework
+- **black**: Code formatting
+- **flake8**: Code linting
+- **PyInstaller**: Executable packaging
+
+## 🧩 Integration with CLI
+
+CONFIGO GUI integrates seamlessly with the CONFIGO CLI backend through a clean submodule architecture:
+
+```
+GUI Application
+├── gui/                    # All GUI app logic
+│   ├── main.py            # GUI launcher
+│   ├── views/             # All screens/pages
+│   ├── components/        # Reusable UI components
+│   ├── themes/            # Dark mode, glass styles
+│   ├── animations/        # Loading effects
+│   └── backend/           # Wrappers that interface with CLI
+│       └── install_engine.py
+├── cli_submodule/         # External CLI repo as git submodule
+│   └── (CLI logic)
+└── configo_gui_launcher.py
+```
+
+### Backend Interface
+
+The `InstallEngine` class provides a clean interface to the CLI:
+
+- **Plan Generation**: Uses CLI's LLM agent for intelligent planning
+- **Installation Execution**: Leverages CLI's shell executor and validator
+- **Memory Management**: Integrates with CLI's persistent memory system
+- **System Detection**: Uses CLI's system inspector and tool detector
+
+## 🔧 Setup Instructions
 
 ### Prerequisites
 
 - Python 3.8 or higher
-- Google Gemini API key (for LLM features)
-- mem0 API key (optional, for enhanced memory)
+- Git (for submodule management)
+- CONFIGO CLI submodule
 
-### Installation
+### Quick Start
 
-1. **Clone the repository**
+1. **Clone the repository with submodules**
    ```bash
-   git clone https://github.com/kishore-jarviz/configo.git
-   cd configo
+   git clone --recursive https://github.com/KumarCySec/Configo.git
+   cd Configo
    ```
 
-2. **Install dependencies**
+2. **Create virtual environment**
    ```bash
-   pip install -r requirements.txt
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
-3. **Set up environment variables**
+3. **Install dependencies**
    ```bash
-   cp .env.example .env
-   # Edit .env with your API keys
+   pip install -r gui/requirements.txt
    ```
 
-4. **Run CONFIGO**
+4. **Run the application**
    ```bash
-   python main.py
+   python configo_gui_launcher.py
    ```
 
----
+### Development Setup
 
-## 📱 Natural Language App Installation
-
-**NEW!** CONFIGO now supports natural language app installation across all platforms:
+For development and testing:
 
 ```bash
-# Install any app with simple commands
-python main.py install
+# Install with development dependencies
+pip install -r gui/requirements.txt
+
+# Run tests
+pytest gui/tests/
+
+# Format code
+black gui/
+
+# Lint code
+flake8 gui/
 ```
-
-### Examples
-
-```
-What app do you want to install? Install Discord
-What app do you want to install? I need Chrome  
-What app do you want to install? Get me Zoom
-What app do you want to install? Install Slack
-```
-
-### How It Works
-
-1. **🎯 Natural Language Understanding**: CONFIGO understands your intent from simple phrases
-2. **🔍 System Detection**: Automatically detects your OS, distro, and available package managers
-3. **🧠 AI-Powered Planning**: Uses Gemini to generate the optimal installation plan
-4. **🔧 Self-Healing Execution**: Runs commands with automatic error recovery
-5. **🎨 GUI Integration**: Creates desktop shortcuts and menu entries
-6. **💾 Memory Persistence**: Remembers successful installations for future sessions
-
-### Supported Platforms
-
-- **Linux**: apt, snap, flatpak, and direct downloads
-- **macOS**: Homebrew and direct downloads  
-- **Windows**: winget, Chocolatey, and direct downloads
-
----
-
-## 🎮 Usage Modes
-
-### 1. Full Development Environment Setup (Default)
-```bash
-python main.py
-```
-Complete AI-powered development environment setup with tool recommendations, validation, and self-healing.
-
-### 2. Natural Language App Installation
-```bash
-python main.py install
-```
-Install any application using natural language commands.
-
-### 3. Interactive Chat Mode
-```bash
-python main.py chat
-```
-Chat with CONFIGO about your development environment and get personalized recommendations.
-
-### 4. Project Scanning Mode
-```bash
-python main.py scan
-```
-Analyze your current project and get tailored tool recommendations.
-
-### 5. Portal Orchestration
-```bash
-python main.py portal
-```
-Manage login portals for development services (GitHub, OpenAI, etc.).
-
-### 6. Help
-```bash
-python main.py help
-```
-Show available modes and usage information.
-
----
-
-## 🧠 How It Works
-
-### 1. **Memory-Aware Recommendations**
-CONFIGO uses persistent memory to remember:
-- Previously installed tools
-- Failed installations and their fixes
-- User preferences and patterns
-- Session history and analytics
-
-### 2. **LLM-Powered Intelligence**
-- **Gemini Integration**: Advanced language model for intelligent recommendations
-- **Domain Detection**: Automatically identifies your development domain
-- **Context Awareness**: Considers your current project and environment
-- **Self-Healing**: Uses AI to fix installation failures
-
-### 3. **Self-Healing Installation**
-- **Automatic Retry**: Retries failed installations with different approaches
-- **LLM-Powered Fixes**: Uses AI to generate alternative installation methods
-- **Progressive Fallbacks**: Tries multiple package managers and sources
-- **Error Analysis**: Intelligent diagnosis of failure causes
-
-### 4. **Post-Installation Validation**
-- **Tool Verification**: Tests installed tools to ensure functionality
-- **Health Checks**: Comprehensive validation of development environment
-- **Performance Metrics**: Tracks installation success rates and timing
-
----
-
-## 🏗️ Architecture
-
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   User Input    │───▶│  LLM Agent      │───▶│  Installation   │
-│   (Natural      │    │  (Gemini)       │    │  Executor       │
-│    Language)    │    │                 │    │                 │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                       │                       │
-         ▼                       ▼                       ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│  System         │    │  Memory         │    │  Validation     │
-│  Detection      │    │  (mem0/JSON)    │    │  & Self-Healing │
-│                 │    │                 │    │                 │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
-### Core Components
-
-- **`core/enhanced_llm_agent.py`**: LLM integration and intelligent recommendations
-- **`core/memory.py`**: Persistent memory system with mem0 integration
-- **`core/shell_executor.py`**: Command execution with error handling
-- **`core/system.py`**: OS and package manager detection
-- **`ui/enhanced_messages.py`**: Rich terminal UI components
-
----
-
-## 🔧 Configuration
 
 ### Environment Variables
 
@@ -216,96 +166,166 @@ MEM0_API_KEY=your_mem0_api_key_here
 LOG_LEVEL=INFO
 ```
 
-### API Keys
-
-1. **Google Gemini API**: Get your API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
-2. **mem0 API** (optional): Get your API key from [mem0.ai](https://mem0.ai)
-
----
-
 ## 🧪 Testing
 
-Run the test suite to verify all components:
+### Running Tests
 
 ```bash
-python test_app_install.py
+# Run all tests
+pytest
+
+# Run with coverage
+pytest --cov=gui
+
+# Run specific test file
+pytest gui/tests/test_main_window.py
+
+# Run with verbose output
+pytest -v
 ```
 
-This will test:
-- System detection
-- LLM plan generation
-- Memory functions
-- UI components
+### Test Structure
 
----
+```
+gui/tests/
+├── test_main_window.py     # Main window tests
+├── test_welcome_view.py    # Welcome view tests
+├── test_env_selector.py    # Environment selector tests
+├── test_install_plan.py    # Install plan tests
+├── test_sidebar.py         # Sidebar component tests
+├── test_toast.py           # Toast notification tests
+└── test_install_engine.py  # Backend integration tests
+```
 
-## 📊 Features
+### Test Environments
 
-### 🧠 AI Intelligence
-- **Gemini Integration**: Advanced language model for intelligent recommendations
-- **Domain Awareness**: Understands different development domains
-- **Context Awareness**: Considers current project and environment
-- **Self-Healing**: Uses AI to fix installation failures
+Use test environments to simulate install flows:
 
-### 💾 Memory System
-- **Persistent Storage**: Remembers installations and preferences
-- **Semantic Search**: Intelligent memory retrieval
-- **Session Tracking**: Complete setup session history
-- **Learning Capabilities**: Improves recommendations over time
+```bash
+# Create test environment
+python -m venv test_env
 
-### 🔧 Self-Healing
-- **Automatic Retry**: Retries failed installations
-- **LLM-Powered Fixes**: AI-generated alternative methods
-- **Progressive Fallbacks**: Multiple installation approaches
-- **Error Analysis**: Intelligent failure diagnosis
+# Run tests in isolated environment
+pytest --test-env=test_env
+```
 
-### 🎨 User Interface
-- **Rich Terminal UI**: Beautiful, informative interface
-- **Progress Tracking**: Real-time installation progress
-- **Status Updates**: Clear status messages and error reporting
-- **Color-Coded Output**: Intuitive color scheme
+## 📦 Packaging
 
-### 📱 App Installation
-- **Natural Language**: Install apps with simple commands
-- **Cross-Platform**: Works on Linux, macOS, and Windows
-- **GUI Integration**: Creates desktop shortcuts and menu entries
-- **Package Manager Support**: Uses available package managers
+### Creating Executables
 
----
+Using PyInstaller:
+
+```bash
+# Install PyInstaller
+pip install PyInstaller
+
+# Create executable
+pyinstaller --onefile --windowed configo_gui_launcher.py
+
+# Create with icon
+pyinstaller --onefile --windowed --icon=gui/assets/icon.ico configo_gui_launcher.py
+```
+
+### Creating Installers
+
+Using fbs:
+
+```bash
+# Install fbs
+pip install fbs
+
+# Initialize fbs project
+fbs startproject
+
+# Create installer
+fbs freeze
+fbs installer
+```
+
+## 🎁 Screenshots
+
+### Welcome Screen
+![Welcome Screen](gui/assets/screenshots/welcome.png)
+
+### Environment Selector
+![Environment Selector](gui/assets/screenshots/environment.png)
+
+### Installation Progress
+![Installation Progress](gui/assets/screenshots/install.png)
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
-
 ### Development Setup
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Submit a pull request
+1. **Fork the repository**
+2. **Create a feature branch**
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+3. **Make your changes**
+4. **Add tests for new functionality**
+5. **Run tests and ensure they pass**
+6. **Commit your changes**
+   ```bash
+   git commit -m 'Add amazing feature'
+   ```
+7. **Push to the branch**
+   ```bash
+   git push origin feature/amazing-feature
+   ```
+8. **Open a Pull Request**
 
----
+### Code Style
+
+- Follow PEP 8 guidelines
+- Use type hints where appropriate
+- Add docstrings to all functions and classes
+- Keep functions small and focused
+- Use meaningful variable and function names
+
+### Testing Guidelines
+
+- Write tests for all new functionality
+- Maintain test coverage above 80%
+- Use descriptive test names
+- Mock external dependencies
+- Test both success and error cases
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## 🙌 Credits
+
+**Kishore Kumar S** (ECE 2027, GCE Erode)
+
+- **Original CONFIGO CLI**: The intelligent backend that powers this GUI
+- **PySide6**: For the excellent Qt framework
+- **qdarktheme**: For the beautiful dark theme
+- **Python Community**: For the amazing ecosystem
+
+## 📞 Support
+
+- **Documentation**: [https://configo.dev/docs](https://configo.dev/docs)
+- **Issues**: [GitHub Issues](https://github.com/KumarCySec/Configo/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/KumarCySec/Configo/discussions)
+- **Email**: kishore.kumar@configo.dev
+
+## 🔄 Changelog
+
+### Version 1.0.0
+- Initial release
+- Complete GUI implementation with glassmorphism effects
+- Integration with CONFIGO CLI backend
+- Cross-platform support
+- Modern dark theme
+- Real-time progress tracking
+- Toast notification system
+- Memory management
+- Error handling
+
 ---
 
-## 🙏 Acknowledgments
+**Made with ❤️ by Kishore Kumar S**
 
-- **Google Gemini**: For providing the LLM capabilities
-- **mem0**: For enhanced memory functionality
-- **Rich**: For the beautiful terminal UI
-- **Textual**: For the modern terminal interface
-
----
-
-<div align="center">
-
-**🚀 Ready to experience the future of development environment setup?**
-
-*Built with 💡 by [Kishore Kumar S](https://github.com/kishore-jarviz)*
-
-</div> 
+_Built with 💡 by the CONFIGO Team_ 
