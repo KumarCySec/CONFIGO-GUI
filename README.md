@@ -117,18 +117,25 @@ The `InstallEngine` class provides a clean interface to the CLI:
    cd Configo
    ```
 
-2. **Create virtual environment**
+2. **Run the secure setup script**
+   ```bash
+   python setup.py
+   ```
+
+3. **Create virtual environment**
    ```bash
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
-3. **Install dependencies**
+4. **Install dependencies**
    ```bash
    pip install -r gui/requirements.txt
    ```
 
-4. **Run the application**
+5. **Configure your API keys** (follow the setup script instructions)
+
+6. **Run the application**
    ```bash
    python configo_gui_launcher.py
    ```
@@ -153,18 +160,34 @@ flake8 gui/
 
 ### Environment Variables
 
-Create a `.env` file in the project root:
+🔐 **SECURITY SETUP**: CONFIGO requires API keys for AI features. Follow these steps to set up securely:
 
-```env
-# Required: Google Gemini API
-GOOGLE_API_KEY=your_gemini_api_key_here
+1. **Copy the template file**:
+   ```bash
+   cp .env.template .env
+   ```
 
-# Optional: mem0 for enhanced memory
-MEM0_API_KEY=your_mem0_api_key_here
+2. **Add your API keys** to the `.env` file:
+   ```env
+   # Required: Google Gemini API key
+   GEMINI_API_KEY=your_actual_gemini_api_key_here
+   
+   # Optional: Mem0 API key for enhanced memory
+   MEM0_API_KEY=your_actual_mem0_api_key_here
+   
+   # Optional: Logging level
+   LOG_LEVEL=INFO
+   ```
 
-# Optional: Logging level
-LOG_LEVEL=INFO
-```
+3. **Get your API keys**:
+   - **Gemini API**: [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - **Mem0 API**: [Mem0.ai](https://mem0.ai)
+
+⚠️ **IMPORTANT SECURITY NOTES**:
+- Never commit your `.env` file to version control
+- Keep your API keys secure and private
+- Rotate API keys regularly
+- Use different keys for development and production
 
 ## 🧪 Testing
 
@@ -252,6 +275,42 @@ fbs installer
 
 ### Installation Progress
 ![Installation Progress](gui/assets/screenshots/install.png)
+
+## 🔒 Security
+
+### API Key Management
+
+CONFIGO uses API keys for AI features. Here are the security best practices:
+
+#### ✅ Secure Practices
+- **Environment Variables**: Always use `.env` files for API keys
+- **Template Files**: Use `.env.template` for safe configuration examples
+- **Git Ignore**: `.env` files are automatically ignored by git
+- **Key Rotation**: Rotate API keys regularly
+- **Environment Separation**: Use different keys for dev/staging/production
+
+#### ❌ Security Risks to Avoid
+- **Never commit API keys** to version control
+- **Don't share API keys** in code or documentation
+- **Avoid hardcoding keys** in source code
+- **Don't use the same key** across multiple projects
+
+#### 🔐 Advanced Security
+For production deployments, consider:
+- **AWS Secrets Manager** or **Google Secret Manager**
+- **HashiCorp Vault** for enterprise environments
+- **Docker secrets** for containerized deployments
+- **Kubernetes secrets** for orchestrated environments
+
+### Reporting Security Issues
+
+If you discover a security vulnerability, please:
+1. **Do not create a public issue**
+2. **Email directly**: security@configo.dev
+3. **Include details** about the vulnerability
+4. **Allow time** for assessment and fix
+
+We take security seriously and will respond promptly to all reports.
 
 ## 🤝 Contributing
 

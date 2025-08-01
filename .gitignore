@@ -7,19 +7,36 @@
 # =============================================================================
 # 🔐 SENSITIVE FILES & API KEYS
 # =============================================================================
+# Environment files (keep template, ignore actual)
 .env
-.env.*
+.env.local
+.env.development
+.env.test
+.env.production
+.env.staging
 !.env.template
+!.env.example
+
+# API Keys and Secrets
 *.key
 *.pem
 *.p12
 *.pfx
+*.crt
+*.cert
 secrets.json
 config.json
 credentials.json
 service-account.json
 api_keys.txt
 secrets.txt
+token.txt
+auth.json
+
+# Security files
+*.gpg
+*.asc
+*.sig
 
 # =============================================================================
 # 🐍 PYTHON SPECIFIC
