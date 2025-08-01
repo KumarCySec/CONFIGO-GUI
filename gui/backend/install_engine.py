@@ -10,6 +10,11 @@ from typing import List, Dict, Optional
 import asyncio
 import json
 
+# Add CLI submodule to path
+cli_submodule_path = Path(__file__).parent.parent.parent / "cli_submodule"
+if cli_submodule_path.exists():
+    sys.path.insert(0, str(cli_submodule_path))
+
 
 class InstallEngine:
     """Backend engine that interfaces with CLI submodule"""
@@ -22,13 +27,10 @@ class InstallEngine:
         if not self.cli_path.exists():
             raise RuntimeError("CLI submodule not found. Please run: git submodule update --init")
             
-        # Add CLI to Python path
-        sys.path.insert(0, str(self.cli_path))
-        
     def get_available_tools(self) -> List[Dict]:
         """Get list of available tools from CLI"""
         try:
-            # Import CLI modules
+            # Import CLI modules from submodule
             from core.system import SystemInspector
             from core.detection import ToolDetector
             
@@ -57,7 +59,7 @@ class InstallEngine:
     def generate_installation_plan(self, description: str) -> Dict:
         """Generate installation plan using CLI logic"""
         try:
-            # Import CLI modules
+            # Import CLI modules from submodule
             from core.enhanced_llm_agent import EnhancedLLMAgent
             from core.planner import InstallationPlanner
             
@@ -82,7 +84,7 @@ class InstallEngine:
     def execute_installation(self, plan: Dict, progress_callback=None) -> Dict:
         """Execute installation using CLI logic"""
         try:
-            # Import CLI modules
+            # Import CLI modules from submodule
             from core.shell_executor import ShellExecutor
             from core.validator import InstallationValidator
             

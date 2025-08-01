@@ -42,7 +42,15 @@ import subprocess
 from datetime import datetime
 from typing import List, Dict, Any, Optional
 
-# Core agent components
+# Core agent components - Import from CLI submodule
+import sys
+from pathlib import Path
+
+# Add CLI submodule to path
+cli_submodule_path = Path(__file__).parent / "cli_submodule"
+if cli_submodule_path.exists():
+    sys.path.insert(0, str(cli_submodule_path))
+
 from core.memory import AgentMemory
 from core.planner import PlanGenerator, PlanExecutor, InstallationPlan
 from core.enhanced_llm_agent import EnhancedLLMAgent
@@ -58,7 +66,7 @@ from ui.enhanced_messages import EnhancedMessageDisplay
 from ui.modern_ui import ModernUI
 from rich.console import Console
 
-# Installation utilities
+# Installation utilities - Import from CLI submodule
 from installers.base import install_tools
 
 

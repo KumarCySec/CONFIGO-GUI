@@ -1,18 +1,24 @@
 #!/usr/bin/env python3
 """
-CONFIGO App Installation Demo
-=============================
+Demo App Installation
+=====================
 
-Demonstrates the natural language app installation feature.
-This script shows how CONFIGO can install applications using simple commands.
+Demonstrates CONFIGO's natural language app installation feature.
+Shows how the agent can install applications based on descriptions.
+
+Author: CONFIGO Team
 """
 
 import sys
 import os
+from pathlib import Path
 
-# Add the project root to the Python path
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# Add CLI submodule to path
+cli_submodule_path = Path(__file__).parent / "cli_submodule"
+if cli_submodule_path.exists():
+    sys.path.insert(0, str(cli_submodule_path))
 
+# Core agent components - Import from CLI submodule
 from core.system import get_system_info
 from core.memory import AgentMemory
 from core.enhanced_llm_agent import EnhancedLLMAgent

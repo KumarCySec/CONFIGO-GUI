@@ -15,62 +15,20 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
 
-# Add parent directory to path for importing existing CONFIGO modules
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-
 from PySide6.QtCore import QObject, Signal, QThread, QTimer
 from PySide6.QtWidgets import QApplication
 
-# Import existing CONFIGO backend modules
-try:
-    from core.ai import suggest_stack, parse_llm_config
-    from core.memory import AgentMemory
-    from core.planner import PlanGenerator, PlanExecutor
-    from core.validator import ToolValidator
-    from core.project_scan import scan_project
-    from core.chat_agent import ChatAgent
-    from core.portal_orchestrator import PortalOrchestrator
-    from core.system_inspector import SystemInspector
-    from installers.base import install_tools
-except ImportError as e:
-    logging.error(f"Failed to import CONFIGO backend modules: {e}")
-    # Create dummy functions for testing
-    def suggest_stack(*args, **kwargs):
-        return [], []
-    
-    def parse_llm_config(*args, **kwargs):
-        return [], []
-    
-    class AgentMemory:
-        def __init__(self):
-            pass
-    
-    class PlanGenerator:
-        def __init__(self):
-            pass
-    
-    class PlanExecutor:
-        def __init__(self):
-            pass
-    
-    class ToolValidator:
-        def __init__(self):
-            pass
-    
-    class ChatAgent:
-        def __init__(self):
-            pass
-    
-    class PortalOrchestrator:
-        def __init__(self):
-            pass
-    
-    class SystemInspector:
-        def __init__(self):
-            pass
-    
-    def install_tools(*args, **kwargs):
-        pass
+# Import CLI wrapper for clean submodule integration
+from .cli_wrapper import (
+    get_cli_module, is_cli_available, get_system_info,
+    generate_installation_plan, scan_project_directory,
+    create_memory_instance, create_llm_agent, create_chat_agent,
+    validate_tool, install_tools
+)
+
+# Check CLI availability
+if not is_cli_available():
+    logging.warning("CLI submodule not available - using fallback functionality")
 
 
 @dataclass
@@ -216,20 +174,29 @@ class ConfigoGUIAgent(QObject):
     def setup_backend_components(self):
         """Initialize backend CONFIGO components."""
         try:
+            # Get CLI modules
+            AgentMemory = get_cli_module('AgentMemory')
+            PlanGenerator = get_cli_module('PlanGenerator')
+            PlanExecutor = get_cli_module('PlanExecutor')
+            ToolValidator = get_cli_module('ToolValidator')
+            ChatAgent = get_cli_module('ChatAgent')
+            PortalOrchestrator = get_cli_module('PortalOrchestrator')
+            SystemInspector = get_cli_module('SystemInspector')
+            
             # Initialize memory
-            self.memory = AgentMemory()
+            self.memory = AgentMemory() if AgentMemory else create_memory_instance()
             
             # Initialize planners
-            self.plan_generator = PlanGenerator()
-            self.plan_executor = PlanExecutor()
+            self.plan_generator = PlanGenerator() if PlanGenerator else create_llm_agent()
+            self.plan_executor = PlanExecutor() if PlanExecutor else create_llm_agent()
             
             # Initialize validators
-            self.validator = ToolValidator()
+            self.validator = ToolValidator() if ToolValidator else create_llm_agent()
             
             # Initialize other components
-            self.chat_agent = ChatAgent()
-            self.portal_orchestrator = PortalOrchestrator()
-            self.system_inspector = SystemInspector()
+            self.chat_agent = ChatAgent() if ChatAgent else create_chat_agent()
+            self.portal_orchestrator = PortalOrchestrator() if PortalOrchestrator else create_llm_agent()
+            self.system_inspector = SystemInspector() if SystemInspector else create_llm_agent()
             
             self.log_message.emit("Backend components initialized successfully")
             
@@ -250,7 +217,7 @@ class ConfigoGUIAgent(QObject):
             self.log_message.emit(f"Generating installation plan for: {environment_description}")
             
             # Generate installation plan using backend
-            tools, portals = suggest_stack(environment_description)
+            tools, portals = generate_installation_plan(environment_description)
             
             # Convert to InstallationStep objects
             installation_steps = []

@@ -17,6 +17,13 @@ from .portal_integration import PortalIntegrationWidget, PortalItem
 from .memory_view import MemoryViewWidget
 from .error_handler import ErrorHandlerWidget, ErrorDialog
 
+# Modern UI components
+try:
+    from .modern_main_window import ModernMainWindow
+    MODERN_UI_AVAILABLE = True
+except ImportError:
+    MODERN_UI_AVAILABLE = False
+
 __all__ = [
     'MainWindow',
     'WelcomeScreen', 
@@ -30,4 +37,8 @@ __all__ = [
     'MemoryViewWidget',
     'ErrorHandlerWidget',
     'ErrorDialog',
-] 
+]
+
+# Add modern components if available
+if MODERN_UI_AVAILABLE:
+    __all__.append('ModernMainWindow') 

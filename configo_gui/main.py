@@ -1,22 +1,24 @@
 #!/usr/bin/env python3
 """
-CONFIGO GUI - Desktop Application
-=================================
+CONFIGO GUI - Modern Desktop Application
+========================================
 
 A modern, cross-platform GUI desktop application for CONFIGO,
-the Autonomous AI Setup Agent. Built with PySide6 (Qt for Python).
+the Autonomous AI Setup Agent. Built with PySide6 (Qt for Python)
+with advanced glassmorphism effects and animations.
 
 Features:
-- 🎨 Modern dark theme UI
+- 🎨 Modern glassmorphism UI with blur effects
 - 🧠 AI-powered environment setup
-- 📋 Visual plan rendering
-- 🖥️ Real-time log console
-- 🌐 Portal integration
-- 💾 Memory management
+- 📋 Visual plan rendering with animations
+- 🖥️ Real-time log console with syntax highlighting
+- 🌐 Portal integration with modern styling
+- 💾 Memory management with visual timeline
 - ⚡ Async backend operations
+- 🎭 Smooth animations and transitions
+- 🌈 Modern color scheme and typography
 
 Author: CONFIGO Team
-License: MIT
 """
 
 import sys
@@ -25,21 +27,34 @@ import logging
 from pathlib import Path
 from typing import Optional
 
-# Add current directory and parent directory to path for importing modules
-sys.path.insert(0, str(Path(__file__).parent))
-sys.path.insert(0, str(Path(__file__).parent.parent))
+# Add current directory to Python path FIRST
+current_dir = Path(__file__).parent
+sys.path.insert(0, str(current_dir))
 
-from PySide6.QtWidgets import (
-    QApplication, QMainWindow, QWidget, QVBoxLayout, 
-    QHBoxLayout, QStackedWidget, QLabel, QPushButton,
-    QFrame, QSizePolicy, QSpacerItem
-)
-from PySide6.QtCore import Qt, QThread, Signal, QTimer, QPropertyAnimation, QEasingCurve
-from PySide6.QtGui import QFont, QPalette, QColor, QIcon, QPixmap
+# Add parent directory to Python path
+parent_dir = current_dir.parent
+sys.path.insert(0, str(parent_dir))
 
-# Import GUI components
-from ui.main_window import MainWindow
-from configo_core.gui_agent import ConfigoGUIAgent
+print(f"📁 Current directory: {current_dir}")
+print(f"🐍 Python path starts with: {sys.path[:3]}")
+
+from PySide6.QtWidgets import QApplication
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QIcon
+
+# Import modern main window
+try:
+    from ui.modern_main_window import ModernMainWindow
+    print("✅ Successfully imported ModernMainWindow")
+except ImportError as e:
+    print(f"❌ Failed to import ModernMainWindow: {e}")
+    # Fallback to demo if modern main window is not available
+    try:
+        from demo_modern_gui import ModernDemoWindow as ModernMainWindow
+        print("✅ Falling back to ModernDemoWindow")
+    except ImportError as e2:
+        print(f"❌ Failed to import demo window: {e2}")
+        sys.exit(1)
 
 # Setup logging
 logging.basicConfig(
@@ -54,48 +69,16 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def setup_dark_theme(app: QApplication) -> None:
+def setup_application_properties(app: QApplication) -> None:
     """
-    Apply a modern dark theme to the application.
-    
-    Args:
-        app: The QApplication instance
-    """
-    # Create dark palette
-    palette = QPalette()
-    
-    # Set dark colors
-    palette.setColor(QPalette.Window, QColor(53, 53, 53))
-    palette.setColor(QPalette.WindowText, QColor(255, 255, 255))
-    palette.setColor(QPalette.Base, QColor(25, 25, 25))
-    palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53))
-    palette.setColor(QPalette.ToolTipBase, QColor(255, 255, 255))
-    palette.setColor(QPalette.ToolTipText, QColor(255, 255, 255))
-    palette.setColor(QPalette.Text, QColor(255, 255, 255))
-    palette.setColor(QPalette.Button, QColor(53, 53, 53))
-    palette.setColor(QPalette.ButtonText, QColor(255, 255, 255))
-    palette.setColor(QPalette.BrightText, QColor(255, 0, 0))
-    palette.setColor(QPalette.Link, QColor(42, 130, 218))
-    palette.setColor(QPalette.Highlight, QColor(42, 130, 218))
-    palette.setColor(QPalette.HighlightedText, QColor(255, 255, 255))
-    
-    # Set the palette
-    app.setPalette(palette)
-    
-    # Set application style
-    app.setStyle("Fusion")
-
-
-def setup_application_style(app: QApplication) -> None:
-    """
-    Configure application-wide styling.
+    Configure application-wide properties and styling.
     
     Args:
         app: The QApplication instance
     """
     # Set application properties
     app.setApplicationName("CONFIGO GUI")
-    app.setApplicationVersion("1.0.0")
+    app.setApplicationVersion("2.0.0")
     app.setOrganizationName("CONFIGO")
     app.setOrganizationDomain("configo.dev")
     
@@ -103,6 +86,13 @@ def setup_application_style(app: QApplication) -> None:
     icon_path = Path(__file__).parent / "assets" / "icon.png"
     if icon_path.exists():
         app.setWindowIcon(QIcon(str(icon_path)))
+    
+    # Enable high DPI scaling
+    app.setAttribute(Qt.ApplicationAttribute.AA_EnableHighDpiScaling, True)
+    app.setAttribute(Qt.ApplicationAttribute.AA_UseHighDpiPixmaps, True)
+    
+    # Set application style
+    app.setStyle("Fusion")
 
 
 def main() -> None:
@@ -110,22 +100,28 @@ def main() -> None:
     Main entry point for CONFIGO GUI application.
     """
     try:
+        print("🚀 Starting CONFIGO GUI...")
+        
         # Create QApplication
         app = QApplication(sys.argv)
         
-        # Setup theme and styling
-        setup_dark_theme(app)
-        setup_application_style(app)
+        # Setup application properties
+        setup_application_properties(app)
         
-        # Create and show main window
-        window = MainWindow()
+        # Create and show modern main window
+        window = ModernMainWindow()
         window.show()
+        
+        print("✅ CONFIGO GUI window created and shown")
         
         # Start application event loop
         sys.exit(app.exec())
         
     except Exception as e:
         logger.error(f"Failed to start CONFIGO GUI: {e}")
+        print(f"❌ Error: {e}")
+        import traceback
+        traceback.print_exc()
         sys.exit(1)
 
 

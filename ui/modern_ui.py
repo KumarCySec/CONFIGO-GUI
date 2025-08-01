@@ -1,20 +1,33 @@
 """
-CONFIGO Modern Terminal UI
-==========================
+CONFIGO Modern UI
+=================
 
-Signature terminal UI/UX for CONFIGO using Rich.
-Features:
-- Clean, modern design with consistent spacing
-- Borderless boxes and clean layouts
-- Minimal emoji + visual cues
-- Spinners, progress bars, summary tables
-- Humanized error messages
-- Responsive and beautiful interface
+Modern terminal UI components for CONFIGO.
+Provides rich, interactive terminal interface with animations.
+
+Author: CONFIGO Team
 """
 
-import logging
-from typing import Dict, List, Any, Optional, Tuple
+import sys
+import os
+from pathlib import Path
+from typing import List, Dict, Any, Optional
+import time
+import asyncio
 from datetime import datetime
+
+# Add CLI submodule to path
+cli_submodule_path = Path(__file__).parent.parent / "cli_submodule"
+if cli_submodule_path.exists():
+    sys.path.insert(0, str(cli_submodule_path))
+
+# Core agent components - Import from CLI submodule
+from core.memory import AgentMemory
+from core.project_scanner import ProjectAnalysis
+from core.portal_orchestrator import PortalOrchestrator
+from core.chat_agent import ChatResponse
+
+import logging
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -29,10 +42,6 @@ from rich.syntax import Syntax
 from rich.markdown import Markdown
 from rich.tree import Tree
 from rich import box
-from core.memory import AgentMemory
-from core.project_scanner import ProjectAnalysis
-from core.portal_orchestrator import PortalOrchestrator
-from core.chat_agent import ChatResponse
 
 logger = logging.getLogger(__name__)
 

@@ -1,22 +1,33 @@
 """
-CONFIGO Enhanced UI Messages
-===========================
+CONFIGO Enhanced Messages
+========================
 
-Rich, interactive UI components for displaying planning steps, tool justifications,
-validation results, and real-time progress updates.
+Enhanced message display system for CONFIGO.
+Provides rich, interactive message components with animations.
 
-Features:
-- 🎨 Rich terminal UI with colors and formatting
-- 📊 Progress bars and spinners
-- 🧠 Tool justification displays
-- ✅ Validation result summaries
-- 🔄 Real-time status updates
-- 🌐 Login portal prompts
-- 📈 Memory context displays
+Author: CONFIGO Team
 """
 
+import sys
+import os
+from pathlib import Path
+from typing import List, Dict, Any, Optional, Union
+import time
+import asyncio
+from datetime import datetime
+
+# Add CLI submodule to path
+cli_submodule_path = Path(__file__).parent.parent / "cli_submodule"
+if cli_submodule_path.exists():
+    sys.path.insert(0, str(cli_submodule_path))
+
+# Core agent components - Import from CLI submodule
+from core.planner import PlanningStep, StepStatus, InstallationPlan
+from core.enhanced_llm_agent import ToolRecommendation, LLMResponse
+from core.validator import ValidationResult, ValidationReport
+from core.memory import AgentMemory
+
 import logging
-from typing import List, Dict, Any, Optional
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -28,10 +39,6 @@ from rich.rule import Rule
 from rich.live import Live
 from rich.tree import Tree
 from rich.layout import Layout
-from core.planner import PlanningStep, StepStatus, InstallationPlan
-from core.enhanced_llm_agent import ToolRecommendation, LLMResponse
-from core.validator import ValidationResult, ValidationReport
-from core.memory import AgentMemory
 
 logger = logging.getLogger(__name__)
 

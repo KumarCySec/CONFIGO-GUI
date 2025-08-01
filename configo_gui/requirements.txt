@@ -1,11 +1,17 @@
-# CONFIGO GUI - Desktop Application Dependencies
-# ==============================================
-# This file contains all required Python packages for CONFIGO GUI to function properly.
+# CONFIGO GUI - Modern Desktop Application Dependencies
+# ===================================================
+# This file contains all required Python packages for the modern CONFIGO GUI.
 # Each package is listed with its specific purpose in the CONFIGO GUI ecosystem.
 
-# GUI Framework
-PySide6>=6.5.0                    # Qt for Python - Modern GUI framework
-qdarktheme>=3.1.0                  # Dark theme for PySide6 applications
+# GUI Framework - Modern Qt with Advanced Styling
+PySide6>=6.6.0                    # Qt for Python - Modern GUI framework with latest features
+
+# Modern UI and Animation Libraries
+qtawesome>=1.3.0                   # Modern icon library for Qt
+qrcode>=7.4.2                      # QR code generation for portal integration
+
+# Advanced Styling and Effects
+pyqtgraph>=0.13.3                  # High-performance plotting and visualization
 
 # Core HTTP and API dependencies (inherited from CONFIGO backend)
 requests>=2.31.0                   # HTTP requests for API calls
@@ -24,12 +30,14 @@ psutil>=5.9.0                     # System information and process management
 py-cpuinfo>=9.0.0                 # Detailed CPU information detection
 GPUtil>=1.4.0                     # GPU detection and monitoring
 
+# Modern UI Enhancements
+pillow>=10.0.0                    # Image processing for UI elements
+numpy>=1.24.0                     # Numerical computing for animations
+matplotlib>=3.7.0                 # Plotting for system visualizations
+
 # Development and testing dependencies
 pytest>=7.0.0                     # Unit testing framework
 pytest-cov>=4.0.0                 # Test coverage reporting
-
-# Optional: Enhanced UI features
-# pyside6-lottie>=1.0.0          # Lottie animations for PySide6 (uncomment if needed)
 
 # Optional: Enhanced memory and search (uncomment if needed)
 # chromadb>=0.4.0                 # Vector database for semantic search

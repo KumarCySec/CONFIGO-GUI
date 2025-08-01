@@ -1,34 +1,29 @@
 #!/usr/bin/env python3
 """
-CONFIGO Comprehensive Test Suite
-================================
+Comprehensive Test Suite for CONFIGO
+====================================
 
-Systematic testing of all CONFIGO features including:
-- Environment detection and stack planning
-- App installation via natural language
-- Chat mode functionality
-- Memory features
-- Self-healing installation
-- Tool detection
-- Validation reports
-- Edge cases and error handling
-- Browser login prompts
-- Terminal UI and readability
+Tests all major components of the CONFIGO autonomous setup agent.
+Includes tests for AI planning, memory management, tool validation,
+project scanning, and installation execution.
+
+Author: CONFIGO Team
 """
 
-import os
 import sys
-import subprocess
-import time
-import json
+import os
 import logging
-from typing import Dict, List, Any, Optional
-from datetime import datetime
+from pathlib import Path
+from typing import List, Dict, Any, Optional
+import json
+import time
 
-# Add the project root to the path
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# Add CLI submodule to path
+cli_submodule_path = Path(__file__).parent / "cli_submodule"
+if cli_submodule_path.exists():
+    sys.path.insert(0, str(cli_submodule_path))
 
-# Import CONFIGO components
+# Core agent components - Import from CLI submodule
 from core.memory import AgentMemory
 from core.enhanced_llm_agent import EnhancedLLMAgent
 from core.app_name_extractor import AppNameExtractor
